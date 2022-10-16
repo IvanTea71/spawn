@@ -8,6 +8,8 @@ public class EnemySpawn : MonoBehaviour
     [SerializeField] private List<GameObject> _spawns = new List<GameObject>();
     
     private Coroutine _spawner;
+    private static int _waitSeconds = 2;
+    private WaitForSeconds _waitForSeconds = new WaitForSeconds(_waitSeconds);
 
     private void Start()
     {
@@ -31,7 +33,8 @@ public class EnemySpawn : MonoBehaviour
             Enemy enemy = Instantiate(_template, Vector3.zero, Quaternion.identity);
             Transform enemyTransform = enemy.GetComponent<Transform>();
             enemyTransform.position = _spawns[i].transform.position;
-            yield return new WaitForSeconds(2);
+            
+            yield return _waitForSeconds;
         }
     }
 }
